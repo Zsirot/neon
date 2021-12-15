@@ -1,0 +1,104 @@
+//Seed Databases using data from Printful api...progress 75%
+Gathered product ids of every product in the store from the printful endpoint.
+    
+
+//Use data from printful to seed new product and product variant models:
+In order to populate the products page, I needed the ability to manipulate printful data effectively. Hardcoding each product individually
+would have been extremely time consuming/not scaleable. I created some functions which take data from the api and to create new product models
+with nested variants (along with variant models).
+    problems:
+        In the printful API, each product has a variant for every permutation of size and color, with each variant having an id.
+        However, these variants don't have properties for size and color, which is necessary data when considering
+        how to populate the form templates(for each product) and how to receive a users size and color selections.  
+        In the printful API, we can only see size and color as parts of a string in the variant.name, 
+        which includes all of the product name, size and color. Therefore, it became necessary to create
+        a function that parses the size and color from the variant.name into new variables on our own variant model.
+
+        It wasn't initially clear how I could gather data about whether an item was in stock. I later found that sync variants (the custom product variants)
+        do not actually have stock information, only the variants themselves(the non-customized version of the item) have in stock information. I realized
+        there was a variant_id on each sync variant that referred to non-customized version of the product. This is what I needed in order to check stock of 
+        an item. The only way to do this is through a different prinful endpoint: the printful catalog. Therefore, i needed to incorporate that information 
+        when seeding the database. I fetched the non-customized variant id that was already a property on the customized variant, and also gathered that same id from the non-customized
+        variant, then cross referenced the stock status of the non-customized variant with non-customized variant id that was located on the customized variant.
+        After this, I made a conditional that only seeded variants with an inStock status of 'true'
+
+//Populate the products page with mongodb data
+    Using a bootstrap modal to display the desired product on the products page, I created a simple HTML form for each product with
+    size and color selctions. using EJS, I created a loop in order to populate that page with any amount of products that exist in
+    the database, along with every possible color and size combination in the form selects.
+        problems: Unfortunately, each individual product does not necessarily share the same size and color options. Some products didn't
+        have a color at all. I needed to make EJS only render color selects if colors existed on any of the product's variant, in addition to
+        rendering only the available products and colors. 
+
+        price: Originally, I wanted to use eventListeners on each form select that would trigger the price of whichever variant was selected,
+        but that proved too complicated. I would have needed to add some javascript that runs after the ejs form population (for each product),
+        with eventListeners on every form select. However, since the form selects were populated dynamically with ejs, they did not all function the same.
+        Some had no color, or a different amount of options. A variant with size and color specifications requires a combination of both values to generate
+        the variant ID(and the price) which finally gets submitted to the cart and printful's api. 
+       
+
+
+//Use incoming form body data to find product variants in the database...progress 75%
+    I made a findProduct() function which matches all 3 data points (or just two, if !color) from the user's selection to the proper variant 
+    in the product database.
+
+
+//Add them to the cart object...progress 10%
+
+// Create Order: POST https://api.printful.com/orders
+{
+    "recipient": {
+        "name": "Zach S",
+        "address1": "test address",
+        "city": "Aurora",
+        "state_code": "CO",
+        "country_code": "US",
+        "zip": "80010"
+    },
+    "items": //Transfer items from cart to this object, using only qty and variant id
+        {
+            "quantity": 1,
+            "sync_variant_id": 2786875838
+        }
+    ]
+}
+///Calculate Tax, Currency
+///Stripe
+
+// Send the information above, will return: {
+"result": {
+    "id": 62330722,
+    "status": "draft"
+}
+}
+Submit Order for fulfilment (orderId, returned from Create order result):
+    POST https: //api.printful.com/orders/{id}/confirm //Order id in url here
+
+                                                        <% if(product.variants[0].color) { %> ///only supports two colors
+                                                        right now
+                                                        <select class="form-select m-3" aria-label="color-select"
+                                                            name="color">
+                                                            <option selected value="<%=product.variants[0].color%>">
+                                                                <%=product.variants[0].color%>
+                                                            </option>
+                                                            <option
+                                                                value="<%=product.variants[product.variants.length - 1].color%>">
+                                                                <%=product.variants[product.variants.length - 1].color%>
+                                                            </option>
+                                                        </select>
+                                                        <% } %>
+
+Webhooks:
+
+Webhooks ensure that the app only sends the order out to printful for fulfillment when the stripe payment has been processed. Stripe sends back a Webhook
+that lets us know the order has been paid for. Then, we send a request to printful, who charges us for the order and ships it out. Originally, I had
+planned to send metadata to stripe that included each item's sync variant id and quantity. Then, I could retrieve that order's metadata from stripe via the 
+webhook they send when the payment is processed. Next, I'd send the metadata including all the variant ids for the order. However, I soon realized I had 
+no way of keeping track of which customer triggered the webhook. This meant the webhook needed to contain shipping data somehow. Shipping data was not
+something I wanted to send as metadata to stripe and back, for security purposes. Therefore, I decided to create a Order model in the database
+including the variant ids, quantities and the customer shipping address. All this information gets saved to the database when the user submits
+the order and gets directed to the stripe checkout page. Instead of sending customer data, all we send with the stripe metadata is the 
+reference id for the newly created order in our db. When the order is completed, stripe sends back a webhook with our reference id in the metadata, 
+and we use that id to recall the order that was created in the db. Finally, we submit that order for fulfillment to printful. 
+
+                                                        

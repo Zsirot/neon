@@ -1,0 +1,17 @@
+.btn-primary{
+    color: white;
+    background-color: rgb(107, 214, 0);
+    border-color: rgb(107, 214, 0);
+ }
+.btn-primary:hover{
+    background-color: rgb(78, 156, 0);
+    border-color: rgb(78, 156, 0);
+ }
+.btn-primary:focus, .btn-primary:active {
+    background-color: rgb(78, 156, 0);
+    border-color: rgb(78, 156, 0);
+    box-shadow: 0 0 0 0.25rem rgb(107, 214, 0, 0.5);
+ }
+.sticky-top {
+    position: static;
+ }

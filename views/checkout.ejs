@@ -1,0 +1,268 @@
+<% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/styles/checkout.css">
+    <h1 class="text-center mt-3">CHECKOUT</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 my-5">
+                <form novalidate class="validated-form checkout-form d-grid gap-3" action="/store/checkout"
+                    method="POST">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                            placeholder="Enter email" required>
+                        <div class="valid-feedback">Looks Good!</div>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="first-name">First Name</label>
+                                <input type="text" class="form-control" id="first-name" name="first_name"
+                                    aria-describedby="first-name" required>
+                                <div class="valid-feedback">Looks Good!</div>
+                            </div>
+                            <div class="col">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" class="form-control" id="last-name" name="last_name"
+                                    aria-describedby="last-name" required>
+                                <div class="valid-feedback">Looks Good!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address1">Address</label>
+                        <input type="text" class="form-control" id="address1" name="address_1"
+                            aria-describedby="address1" placeholder="1234 Main St." required>
+                        <div class="valid-feedback">Looks Good!</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address2">Address 2 (Optional)</label>
+                        <input type="text" class="form-control" id="address2" name="address_2"
+                            aria-describedby="address2" placeholder="Apartment or Suite">
+                        <div class="valid-feedback">Looks Good!</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="country">Country</label>
+                            <select class="form-control" id="country" name="country" aria-describedby="country"
+                                required>
+                                <option value="USA">USA</option>
+                            </select>
+                            <div class="valid-feedback">Looks Good!</div>
+                        </div>
+                        <div class="col-3 form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" name="city" aria-describedby="city"
+                                placeholder="City" required>
+                            <div class="valid-feedback">Looks Good!</div>
+                        </div>
+                        <div class="col-3">
+                            <label for="state">State</label>
+                            <select class="form-control" id="state" name="state" aria-describedby="state" required>
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="DC">District Of Columbia</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="IA">Iowa</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MT">Montana</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NH">New Hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NY">New York</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VT">Vermont</option>
+                                <option value="VA">Virginia</option>
+                                <option value="WA">Washington</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WY">Wyoming</option>
+                            </select>
+                            <div class="valid-feedback">Looks Good!</div>
+                        </div>
+                        <div class="col-3">
+                            <label for="zip"></label>
+                            <input type="number" class="form-control" id="zip" placeholder="Zip Code" name="zip"
+                                aria-describedby="zip-code" required>
+                            <div class="valid-feedback">Looks Good!</div>
+                            </input>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary hidden-checkout" type="submit"
+                        style="display: none;">Checkout</button>
+
+
+
+                </form>
+                <div class="d-flex justify-content-between my-4">
+                    <form action="/store" method="GET">
+                        <button href="/store" class="btn btn-primary">Back to Store</button>
+                    </form>
+                    <button class="btn btn-primary shown-checkout" type="submit">Checkout</button>
+                </div>
+
+            </div>
+            <div class="col-md-6 order-md-1 mb-5 mt-md-5">
+                <% if(cart.data.items.length> 0) { %>
+                    <% for(let [i, item] of cart.data.items.entries()) { %>
+                        <div class="card w-100 my-3">
+                            <div class="card-header d-flex flex-row align-items-start justify-content-between"
+                                style="background-color: rgb(227, 255, 238);">
+                                <span class="shorten-name text-dark">
+                                    <%=item.title%>
+                                </span>
+                                <form method="POST" action="/store/checkout/<%=item.id%>?_method=DELETE"
+                                    name="delete-item <%=i%>" class="d-flex justify-content-center"><button
+                                        type="delete" class="text-dark mx-2"
+                                        style="border: 0; background-color: transparent;"><i
+                                            class="fas fa-minus-circle fs-6"></i></button>
+                                </form>
+                            </div>
+                            <div class="card-body text-dark h-20 d-flex justify-content-between align-items-center">
+
+                                <input name="item <%=i%>" type="hidden" value="<%=item.id%>">
+                                <img class="cart-img" src="<%=item.image%>" alt="shop-list-image">
+                                <div class="d-flex flex-column w-100 align-items-center">
+                                    <div class="d-flex justify-content-evenly w-100">
+
+                                        <% if(item.color) { %>
+                                            <div
+                                                class="cart-spec d-flex flex-column justify-content-center align-items-center">
+                                                <div class="text-muted fw-light">Color</div>
+                                                <span>
+                                                    <%=item.color%>
+                                                </span>
+                                            </div>
+                                            <% } else { %>
+                                                <div
+                                                    class="cart-spec d-flex flex-column justify-content-center align-items-center p-3">
+                                                </div>
+                                                <% } %>
+                                                    <% if(item.size) { %>
+                                                        <div
+                                                            class="cart-spec d-flex flex-column justify-content-center align-items-center">
+                                                            <div class="text-muted fw-light">Size</div>
+                                                            <span>
+                                                                <%=item.size%>
+                                                            </span>
+                                                        </div>
+                                                        <% } else { %>
+                                                            <div
+                                                                class="cart-spec d-flex flex-column justify-content-center align-items-center p-3">
+                                                            </div>
+                                                            <% } %>
+                                                                <div
+                                                                    class="cart-spec d-flex flex-column justify-content-center align-items-center">
+                                                                    <div class="text-muted fw-light">Quantity</div>
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center align-items-center">
+                                                                        <form method="POST"
+                                                                            action="/store/checkout/<%=item.id%>?_method=PATCH"
+                                                                            id="qtyupdate<%=i%>">
+                                                                            <select class="qty-update form-select"
+                                                                                name="qty" id="cart-qty"
+                                                                                aria-label="quantity select"
+                                                                                onchange="this.form.submit()">
+                                                                                <option selected value="<%=item.qty%>">
+                                                                                    <%=item.qty%>
+                                                                                </option>
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                                <option value="6">6</option>
+                                                                                <option value="7">7</option>
+                                                                                <option value="8">8</option>
+                                                                                <option value="9">9</option>
+                                                                                <option value="10">10</option>
+                                                                                <option value="11">11</option>
+                                                                                <option value="12">12</option>
+                                                                                <option value="13">13</option>
+                                                                                <option value="14">14</option>
+                                                                                <option value="15">15</option>
+                                                                                <option value="16">16</option>
+                                                                                <option value="17">17</option>
+                                                                                <option value="18">18</option>
+                                                                                <option value="19">19</option>
+                                                                                <option value="20">20</option>
+                                                                                <option value="21">21</option>
+                                                                                <option value="22">22</option>
+                                                                                <option value="23">23</option>
+                                                                                <option value="24">24</option>
+                                                                                <option value="25">25</option>
+                                                                            </select>
+
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% } %>
+
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.getElementsByClassName('validated-form');
+                // Loop over them and prevent submission
+                const validation = Array.from(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+    <script src="/scripts/checkout.js"></script>

@@ -1,0 +1,40 @@
+{
+  "name": "neonnoir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "base-64": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.6.0",
+    "currency.js": "^2.0.4",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "ejs-mate": "^3.0.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.5.1",
+    "express-router": "0.0.1",
+    "express-session": "^1.17.2",
+    "express-slow-down": "^1.4.0",
+    "helmet": "^4.6.0",
+    "joi": "^17.5.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.0.7",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "node-sessionstorage": "^1.0.0",
+    "stripe": "^8.176.0"
+  },
+  "devDependencies": {
+    "sass": "^1.42.1"
+  }
+}

@@ -1,0 +1,63 @@
+/* Home Page links */
+h1 a{
+    font-family: Universe; 
+    font-size: 6rem;  
+    z-index: 3;
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(251, 243, 174);
+    transition: all 0.3s ease;
+}
+h1 a:hover{
+    color: rgb(224, 65, 185);
+}
+
+/* Overlay */
+.background-pic {
+    position: relative;
+    background: url('/images/bandpic3.jpg') no-repeat fixed;
+    background-position: center bottom;
+    background-size: cover;
+    min-height: 10vh;
+}
+.image-overlay.animate {
+    background: rgb(54, 202, 214, 0.56)
+}
+
+/* Home page links */
+.cube1{
+    height: 200px;
+    border-radius: 6%;
+    opacity: 0.9;
+}
+.cube2{
+    height: 200px;
+    border-radius: 6%;
+    opacity: 0.9;
+}
+.cube3{
+    height: 200px;
+    border-radius: 6%;
+    opacity: 0.9;
+}
+.cube4{
+    height: 200px;
+    border-radius: 6%;
+    opacity: 0.9;
+}
+
+
+.photo-text {
+    color: white;
+}
+
+/* Unused for now, for eventual Biography */
+.spacer {
+    width: 100vw; 
+    height: 60vh; 
+}
+@media(max-width: 1205px) {
+    .spacer {
+        height: 75vh;
+    }
+}

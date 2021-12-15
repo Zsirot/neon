@@ -1,0 +1,12 @@
+ .background-pic {
+    position: relative;
+    background: url('/images/city.jfif') no-repeat fixed;
+    background-position: center bottom;
+    background-size: cover;
+    width: 100vw;
+    min-height: 10vh;
+ }
+ .image-overlay.animate {
+    background-color: rgb(133, 239, 207, 0.5)
+  }
+ 

@@ -1,0 +1,325 @@
+<% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/styles/store.css">
+    <div class="background-pic d-flex flex-column align-items-start justify-content-evenly">
+        <div class="image-overlay <% if (cart.data.items.length > 0) { %> animate <% } %>"></div>
+        <div class="banner">
+            <h1 class="banner-text">STORE</h1>
+        </div>
+
+
+
+        <div class="container w-100 d-flex flex-wrap justify-content-center">
+            <% for (let [i, product] of allItems.entries()) { %>
+                <div class="card bg-dark m-5" data-bs-toggle="modal" data-bs-target="#Modal<%=i%>" role="button">
+                    <img src="<%=product.thumbnail_url%>" class="card-img-top" alt="image <%=product.name%>">
+                    <div class="card-body bg-dark shadow-lg d-flex align-items-center justify-content-center">
+                        <p class="text-light text-center my-1">
+                            <%=product.name%>
+                        </p>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="Modal<%=i%>" tabindex="-1" aria-labelledby="ModalLabel<%=i%>"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content bg-dark text-light">
+                            <div class="modal-header d-flex">
+                                <h5 class="modal-title" id="ModalLabel<%=i%>">
+                                    <%=product.name%>
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="details container">
+                                    <div class="row">
+
+                                        <div class="col">
+
+                                            <form action="/store"
+                                                class="d-flex flex-column align-items-center add-product-btn"
+                                                method="POST">
+                                                <div class="row d-flex justify-content-center">
+                                                    <img class="col-6 storeImg w-33 p-3"
+                                                        src="<%=product.thumbnail_url%>" alt="image <%=product.name%>">
+                                                    <div class="col-6 d-flex flex-column justify-content-center">
+                                                        <input id="prodId" name="prodId" type="hidden"
+                                                            value="<%=product.product_id%>">
+                                                        <input id="imgUrl" name="imgUrl" type="hidden"
+                                                            value="<%=product.thumbnail_url%>">
+                                                        <input id="title" name="title" type="hidden"
+                                                            value="<%=product.name%>">
+                                                        <% if(product.variants[0].color) { %>
+                                                            <div class="d-flex flex-row align-items-center">
+                                                                <span class="col-6 d-flex justify-content-center">Color
+                                                                    <%= %>
+                                                                </span>
+                                                                <div class="col-6">
+                                                                    <select class="form-select my-3"
+                                                                        aria-label="color-select" name="color">
+                                                                        <% let arr=[]; for (let variant of
+                                                                            product.variants) { arr.push(variant.color)
+                                                                            } let uniqueItems=[]; arr.forEach((c)=> {
+                                                                            if (!uniqueItems.includes(c)) {
+                                                                            uniqueItems.push(c);
+                                                                            }
+                                                                            });
+                                                                            for (let color of uniqueItems) { %>
+                                                                            <option value="<%=color%>">
+                                                                                <%=color%>
+                                                                            </option>
+                                                                            <% } %>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+                                                                <% if(product.variants[0].size) { %>
+                                                                    <div class="d-flex flex-row align-items-center">
+                                                                        <span
+                                                                            class="col-6 d-flex justify-content-center">
+                                                                            Size</span>
+                                                                        <div class="col-6">
+                                                                            <select class="form-select my-3"
+                                                                                aria-label="size select" name="size">
+                                                                                <% let arr=[]; for (let variant of
+                                                                                    product.variants) {
+                                                                                    arr.push(variant.size) } let
+                                                                                    uniqueItems=[]; arr.forEach((c)=> {
+                                                                                    if (!uniqueItems.includes(c)) {
+                                                                                    uniqueItems.push(c);
+                                                                                    }
+                                                                                    });
+                                                                                    for (let size of uniqueItems) { %>
+                                                                                    <option value="<%=size%>">
+                                                                                        <%=size%>
+                                                                                    </option>
+                                                                                    <% } %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <% } %>
+                                                                        <div class="d-flex flex-row align-items-center">
+                                                                            <label for="qty"
+                                                                                class="col-6 d-flex justify-content-center">Quantity</label>
+                                                                            <div class="col-6">
+                                                                                <select class="form-select my-3"
+                                                                                    name="qty" id="qty"
+                                                                                    aria-label="quantity select">
+                                                                                    <option selected value="1">1
+                                                                                    </option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                    <option value="7">7</option>
+                                                                                    <option value="8">8</option>
+                                                                                    <option value="9">9</option>
+                                                                                    <option value="10">10</option>
+                                                                                    <option value="11">11</option>
+                                                                                    <option value="12">12</option>
+                                                                                    <option value="13">13</option>
+                                                                                    <option value="14">14</option>
+                                                                                    <option value="15">15</option>
+                                                                                    <option value="16">16</option>
+                                                                                    <option value="17">17</option>
+                                                                                    <option value="18">18</option>
+                                                                                    <option value="19">19</option>
+                                                                                    <option value="20">20</option>
+                                                                                    <option value="21">21</option>
+                                                                                    <option value="22">22</option>
+                                                                                    <option value="23">23</option>
+                                                                                    <option value="24">24</option>
+                                                                                    <option value="25">25</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div>
+                                                            <% const minMax=product.price_range.split('-');
+                                                                if(minMax[0].trim()===minMax[1].trim()) { %>
+                                                                <div class="my-2 text-center">Price Per: <%=minMax[0]%>
+                                                                </div>
+                                                                <% } else { %>
+                                                                    <div class="my-2 text-center">Price Range: $
+                                                                        <%=product.price_range%>
+                                                                    </div>
+                                                                    <% } %>
+                                                        </div>
+                                                        <div class="d-flex align-items-center justify-content-center">
+                                                            <button type="submit" class="btn btn-primary my-3">Add
+                                                                to
+                                                                Cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                        <div class="mx-3">
+                                            <%=product.description.head%>
+                                        </div>
+
+                                        <p class="container d-flex justify-content-end">
+                                            <button class="btn btn-primary mt-3 mb-0 mx-3" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#detailsCollapse<%=i%>"
+                                                aria-expanded="false" aria-controls="detailsCollapse<%=i%>">
+                                                more details...
+                                            </button>
+                                        </p>
+                                        <div class="collapse" id="detailsCollapse<%=i%>">
+                                            <div class="card card-body text-light bg-dark border-0 my-4">
+                                                <ul>
+                                                    <%for (let bullet of product.description.bullets) { %>
+                                                        <li>
+                                                            <%=bullet%>
+                                                        </li>
+                                                        <% } %>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <span style="transform: translateY(6.5px);">Powered by</span>
+                                    <img src="/images/printful_brand.png" alt="printful-brand"
+                                        style="max-width: 5rem; ">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+        </div>
+
+        <div class="offcanvas offcanvas-end bg-dark text-light" tabindex="-1" id="offcanvasRight"
+            aria-labelledby="offcanvasRightLabel" data-bs-scroll="true" data-bs-backdrop="true">
+            <div class="offcanvas-header">
+                <h5 id="offcanvasRightLabel">Shopping Cart</h5>
+                <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="d-flex justify-content-between">
+                    <form class="shop-list" action="/store?_method=DELETE" method="POST">
+                        <button class="btn btn-outline-danger" type="submit">Empty Cart</button>
+                    </form>
+                    <form class="shop-list" action="/store/checkout" method="GET">
+                        <button class="btn btn-primary" type="submit">Checkout</button>
+                    </form>
+                </div>
+                <% if(cart.data.items.length> 0) { %>
+                    <% for(let [i, item] of cart.data.items.entries()) { %>
+                        <div class="card w-100 my-3">
+                            <div class="card-header d-flex flex-row align-items-start justify-content-between pe-0"
+                                style="background-color: rgb(227, 255, 238);">
+                                <span class="shorten-name text-dark">
+                                    <%=item.title%>
+                                </span>
+                                <form method="POST" action="/store/<%=item.id%>?_method=DELETE"
+                                    name="delete-item <%=i%>" class="d-flex justify-content-center"><button
+                                        type="delete" class="text-dark mx-2"
+                                        style="border: 0; background-color: transparent;"><i
+                                            class="fas fa-minus-circle fs-6"></i></button>
+                                </form>
+                            </div>
+                            <div class="card-body text-dark h-20 d-flex justify-content-between align-items-center">
+
+                                <input name="item <%=i%>" type="hidden" value="<%=item.id%>">
+                                <img class="cart-img" src="<%=item.image%>" alt="shop-list-image">
+                                <div class="d-flex flex-column w-100 align-items-center">
+                                    <div class="d-flex justify-content-evenly w-100">
+
+                                        <% if(item.color) { %>
+                                            <div
+                                                class="cart-spec d-flex flex-column justify-content-center align-items-center">
+                                                <div class="text-muted fw-light">Color</div>
+                                                <span>
+                                                    <%=item.color%>
+                                                </span>
+                                            </div>
+                                            <% } else { %>
+                                                <div
+                                                    class="cart-spec d-flex flex-column justify-content-center align-items-center p-3">
+                                                </div>
+                                                <% } %>
+                                                    <% if(item.size) { %>
+                                                        <div
+                                                            class="cart-spec d-flex flex-column justify-content-center align-items-center">
+                                                            <div class="text-muted fw-light">Size</div>
+                                                            <span>
+                                                                <%=item.size%>
+                                                            </span>
+                                                        </div>
+                                                        <% } else { %>
+                                                            <div
+                                                                class="cart-spec d-flex flex-column justify-content-center align-items-center p-3">
+                                                            </div>
+                                                            <% } %>
+                                                                <div
+                                                                    class="cart-spec d-flex flex-column justify-content-center align-items-center">
+                                                                    <div class="text-muted fw-light">Quantity</div>
+                                                                    <div
+                                                                        class="d-flex flex-column justify-content-center align-items-center">
+                                                                        <form method="POST"
+                                                                            action="/store/<%=item.id%>?_method=PATCH"
+                                                                            id="qtyupdate<%=i%>">
+                                                                            <select class="form-select" name="qty"
+                                                                                id="cart-qty"
+                                                                                aria-label="quantity select"
+                                                                                onchange="this.form.submit()">
+                                                                                <option selected value="<%=item.qty%>">
+                                                                                    <%=item.qty%>
+                                                                                </option>
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                                <option value="6">6</option>
+                                                                                <option value="7">7</option>
+                                                                                <option value="8">8</option>
+                                                                                <option value="9">9</option>
+                                                                                <option value="10">10</option>
+                                                                                <option value="11">11</option>
+                                                                                <option value="12">12</option>
+                                                                                <option value="13">13</option>
+                                                                                <option value="14">14</option>
+                                                                                <option value="15">15</option>
+                                                                                <option value="16">16</option>
+                                                                                <option value="17">17</option>
+                                                                                <option value="18">18</option>
+                                                                                <option value="19">19</option>
+                                                                                <option value="20">20</option>
+                                                                                <option value="21">21</option>
+                                                                                <option value="22">22</option>
+                                                                                <option value="23">23</option>
+                                                                                <option value="24">24</option>
+                                                                                <option value="25">25</option>
+                                                                            </select>
+
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% } %>
+
+
+
+            </div>
+        </div>
+    </div>
+    <script src="/scripts/store.js"></script>
+    <script src="/scripts/fixedNav.js"></script>

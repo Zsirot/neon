@@ -1,0 +1,78 @@
+<div class="logobox">
+    <a href="/"><img src="/images/logo.png" alt="" class="logo mb-3"></a>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent sticky-top" style="width: 100vw; ">
+    <button class="navbar-toggler mr-auto ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center py-1 ms-1" <% if (path==='/store' &&
+        cart.data.items.length> 0) { %> style="transform: translateX(6rem)" <% } %>
+            id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link ms-2" href="/">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ms-2" href="/music">MUSIC</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ms-2" href="/shows">SHOWS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ms-2" href="/store">STORE</a>
+                </li>
+                <div class="navbar-nav  d-flex justify-content-lg-center ms-1 link-icons">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://music.apple.com/album/1558321080"><i
+                                class="link-icon fab fa-itunes-note"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://music.amazon.com/albums/B08YWGY636"><i
+                                class="link-icon fab fa-amazon"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://open.spotify.com/album/24lhlbFCgtdWpGUKey28HA"><i
+                                class="link-icon fab fa-spotify"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://www.youtube.com/watch?v=DpUEouL4zfI&list=OLAK5uy_kUnBvq5pSyaihRVzYr0kYHCnwbWTAqJXM"><i
+                                class="link-icon fab fa-youtube"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.facebook.com/NeonNoirDenver"><i
+                                class="link-icon fab fa-facebook"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.instagram.com/neonnoirband/"><i
+                                class="link-icon fab fa-instagram"></i></a>
+                    </li>
+
+
+                </div>
+            </ul>
+
+
+
+    </div>
+    <% if (path==='/store' && cart.data.items.length> 0) { %>
+
+        <div class="checkout-container me-3">
+            <div class="cart-text text-center d-flex align-self-end"><a href="/store/checkout">Checkout</a></div>
+            <div class=" cart-count-circle">
+                <span class="cart-count">
+                    <%=cart.data.itemTotals%>
+                </span>
+            </div>
+            <div class="cart-circle-container">
+
+                <div class="cart-circle btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+
+            </div>
+        </div>
+        <% } %>
+</nav>

@@ -1,0 +1,47 @@
+.modal-body, .modal-header {
+   background-color: rgb(33, 37, 41);
+}
+.navbar.animate.bg-transparent{
+   background-color: rgba(127, 255, 212, 0.801) !important;
+}
+.storeImg {
+    width: 45%;
+    height: 45%;
+}
+.card{
+   width: 20rem; 
+   border: 0; 
+   box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.63)
+}
+.bg-dark{
+   background-color: rgb(33, 37, 41, 0.55) !important;
+}
+
+.offcanvas-body, .offcanvas-header {
+   background-color: rgb(33, 37, 41, 0.75)
+}
+
+.background-pic {
+   position: relative;
+   background: url('/images/shop.jfif') no-repeat fixed;
+   background-position: center bottom;
+   background-size: cover;
+   width: 100vw;
+}
+.image-overlay.animate {
+   background: rgb(247, 83, 84, 0.38)
+   /* background: linear-gradient(180deg, rgb(148 232 207), rgb(242 125 184 / 83%)); */
+ }
+
+.checkout-container{
+   display: flex;
+   z-index: 5;
+}
+.checkout-container.active {
+   display:none;
+}
+@media(max-width: 991px) {
+   .navbar-collapse {
+      transform: translateX(0rem) !important
+   }
+}
