@@ -1,7 +1,9 @@
 # Neon Noir Band Website and Ecommerce Store
 
 This repository is deployed live at the following URL: http://murmuring-anchorage-12307.herokuapp.com/.
+
 It includes a fully functionally ecommerce store with a custom Printful integration (a dropshipping, print-on-demand service)
+
 Currently only set up in a a test environment. Credit card payments via stripe can be tested with the card number 4242 4242 4242 4242, other card fields can be anything
 
 ## Features
