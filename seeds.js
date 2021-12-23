@@ -207,7 +207,7 @@ const specifyWebhookTracking = async () => { // Specifies a list of events and p
             stockProductIds.push(prod.stock_product_id)
         }
         const res = await axios.post('https://api.printful.com/webhooks', { //posts triggering events and product ids to printful (including array from above)
-            "url": `${url}/webhooks/printful`, //this should be a variable or the final site url
+            "url": `${url}/webhooks/printful`,
             "types": [
                 "stock_updated",
                 "product_synced",

@@ -68,7 +68,7 @@ const fulfillOrder = async function (stripeOrderId) {
         }, printfulConfig);
         const order = await Order.findByIdAndUpdate(completedOrder.metadata.orderId, { fulfilled: true }, { new: true }) //Updates the completedOrder to 'true' in the DB
         order.save()
-        console.log(`ORDER COMPLETE: ${response.data.result.recipient.email} ${response.data.result.dashboard_url}`)
+        console.log(`webhook-log: ORDER COMPLETE: ${response.data.result.recipient.email} ${response.data.result.dashboard_url}`)
     } catch (e) {
         console.log(e.type)
         throw new AppError(e.raw.message, 400)
@@ -92,7 +92,7 @@ router.post('/stripe', express.raw({ type: 'application/json' }), (req, res) => 
         const stripeOrderId = event.data.object.id; //saved order ID from stripe we can recall in the next function
         fulfillOrder(stripeOrderId); // Fulfill the purchase...
     }
-    console.log('Stripe payment succeeded')
+    console.log('webhook-log: Stripe payment succeeded')
     res.status(200).send();
 })
 
@@ -103,18 +103,17 @@ let triggerBlock = false //block is set to "false" initially
 
 function refreshTrigger() { //when, called sets block to "false" in order to receive another update 
     let triggerBlock = false;
-    console.log('trigger reset')
 }
 router.post('/printful', webhookLimiter, async (req, res) => {
     if (!triggerBlock) { //if block is "false", tells printful message received, blocks the any further requests, and runs functions 
-        console.log('accepted')
+        console.log(`webhook-log: ${req.body.type}`)
         res.status(200).send()
         triggerBlock = true
         assignAllAvailable() // refreshes the database with live stock info from printful
         await specifyWebhookTracking() // tells printful which items' stock to track after they were assigned above
         setTimeout(refreshTrigger, 30 * 1000) //stops blocking requests after 30 seceonds
     } else {
-        res.status(200).send() //notifies printful that any additional requests were received. 
+        res.status(200).send() //notifies printful that any additional requests were received, so that no more are sent
         console.log('rejected')
     }
 })
